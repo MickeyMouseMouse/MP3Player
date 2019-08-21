@@ -1,9 +1,9 @@
 import javafx.scene.control.Button
-import javafx.scene.control.Label
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import jaco.mp3.player.MP3Player // http://jacomp3player.sourceforge.net/guide.html
 import javafx.scene.canvas.Canvas
+import javafx.scene.control.Tooltip
 import javafx.stage.FileChooser
 import javafx.stage.Stage
 import java.io.File
@@ -18,7 +18,7 @@ import java.io.File
 class Controller {
     val buttonOpenFile = Button("Open Audio File")
     val buttonStartStop = Button()
-    val labelInfo = Label()
+    val ticker = Ticker()
     val background = Canvas(315.0, 134.0)
 
     private var statusPlayer = false // false = off, true = on
@@ -39,7 +39,7 @@ class Controller {
     fun chooseFile() {
         val fileChooser = FileChooser()
         fileChooser.title = "Open Audio File"
-        fileChooser.extensionFilters.add(FileChooser.ExtensionFilter("mp3 files", "*.mp3"))
+        fileChooser.extensionFilters.add(FileChooser.ExtensionFilter("Audio", "*.mp3"))
         val file = fileChooser.showOpenDialog(Stage())
 
         if (file != null) activatePlayer(file)
@@ -49,7 +49,8 @@ class Controller {
         closePlayer()
         statusPlayer = false
         buttonStartStop.isDisable = false
-        labelInfo.text = file.name
+        ticker.start(file.name, 25, 0.6)
+        ticker.tooltip = Tooltip(file.name)
 
         player.playList.clear()
         player.addToPlayList(file)

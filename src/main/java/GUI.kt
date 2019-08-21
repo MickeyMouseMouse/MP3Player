@@ -48,14 +48,14 @@ class GUI : Application() {
         controller.buttonStartStop.style = "-fx-padding:0 0 0 0;-fx-background-radius:90;"
         controller.buttonStartStop.isDisable = true
 
-        controller.labelInfo.layoutX = 15.0
-        controller.labelInfo.layoutY = 75.0
-        controller.labelInfo.style = "-fx-font-size:18px"
+        controller.ticker.layoutX = 15.0
+        controller.ticker.layoutY = 75.0
+        controller.ticker.style = "-fx-font-size:18px"
 
         pane.children.add(controller.background)
         pane.children.add(controller.buttonOpenFile)
         pane.children.add(controller.buttonStartStop)
-        pane.children.add(controller.labelInfo)
+        pane.children.add(controller.ticker)
         stage.scene = scene
         stage.show()
 
