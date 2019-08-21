@@ -1,11 +1,11 @@
 import javafx.application.Application
 import javafx.stage.Stage
 import javafx.scene.Scene
+import javafx.scene.Group
+import javafx.scene.paint.Color
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.input.TransferMode
-import javafx.scene.layout.Pane
-import javafx.scene.paint.Color
 
 class GUI : Application() {
     companion object {
@@ -28,15 +28,6 @@ class GUI : Application() {
         stage.isResizable = false
         stage.centerOnScreen()
 
-        val pane = Pane()
-        val scene = Scene(pane)
-
-        controller.background.layoutX = 0.0
-        controller.background.layoutY = 0.0
-        val context = controller.background.graphicsContext2D
-        context.fill = Color.LIGHTBLUE
-        context.fillRect(0.0,0.0,315.0,134.0)
-
         controller.buttonOpenFile.layoutX = 15.0
         controller.buttonOpenFile.layoutY = 15.0
         controller.buttonOpenFile.graphicProperty().value = ImageView(Image("openImage.png"))
@@ -52,23 +43,23 @@ class GUI : Application() {
         controller.ticker.layoutY = 75.0
         controller.ticker.style = "-fx-font-size:18px"
 
-        pane.children.add(controller.background)
-        pane.children.add(controller.buttonOpenFile)
-        pane.children.add(controller.buttonStartStop)
-        pane.children.add(controller.ticker)
-        stage.scene = scene
+        val root = Group()
+        root.children.add(controller.buttonOpenFile)
+        root.children.add(controller.buttonStartStop)
+        root.children.add(controller.ticker)
+        stage.scene = Scene(root, 315.0, 134.0, Color.LIGHTBLUE)
         stage.show()
 
         controller.player.isRepeat = true
 
         // start DragAndDrop
-        pane.setOnDragOver {
+        root.setOnDragOver {
             if (it.dragboard.hasFiles())
                 it.acceptTransferModes(*TransferMode.ANY)
         }
 
         // event on drop new file
-        pane.setOnDragDropped {
+        root.setOnDragDropped {
             val files = it.dragboard.files
 
             if (files.size == 1 && Regex("(.*)\\.(mp3|MP3)").matches(files[0].name))

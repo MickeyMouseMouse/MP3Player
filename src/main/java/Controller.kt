@@ -1,9 +1,8 @@
 import javafx.scene.control.Button
+import javafx.scene.control.Tooltip
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import jaco.mp3.player.MP3Player // http://jacomp3player.sourceforge.net/guide.html
-import javafx.scene.canvas.Canvas
-import javafx.scene.control.Tooltip
 import javafx.stage.FileChooser
 import javafx.stage.Stage
 import java.io.File
@@ -19,7 +18,6 @@ class Controller {
     val buttonOpenFile = Button("Open Audio File")
     val buttonStartStop = Button()
     val ticker = Ticker()
-    val background = Canvas(315.0, 134.0)
 
     private var statusPlayer = false // false = off, true = on
 

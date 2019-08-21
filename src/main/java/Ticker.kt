@@ -53,7 +53,7 @@ class Ticker : Label() {
             str = StringBuilder(" ")
             str.append(string).append(" ")
             num = number
-            del = delay * 1000000000
+            del = 1000000000 * delay
 
             start()
         }
